@@ -1,0 +1,96 @@
+model 5 
+soft update
+
+train_episodes = 20000
+load_ckpt = False
+#load_ckpt = True
+ckpt_save_freq = 100
+
+env = football_env.create_environment(env_name = "academy_empty_goal", 
+                                    representation = "simple115",
+                                    number_of_left_players_agent_controls = 1,
+                                    stacked = False, logdir = "/tmp/football",
+                                    write_goal_dumps = False,
+                                    write_full_episode_dumps = False, render = False)
+
+dqn_agent = DQN(
+    env = env,
+    obs_size = (115,),
+    num_frame_stack = 1,
+    batch_size = 128,
+    mdp_gamma = 0.99,
+    initial_epsilon = 1.0,
+    min_epsilon = 0.1,
+    epsilon_decay_steps = int(1e6),
+    replay_capacity = int(1e5),
+    min_replay_size = int(1024),
+    train_freq = 4,
+    network_update_freq = 4
+)
+dqn_agent.setup_graph()
+==============================================================================================
+model 6
+hard update
+
+train_episodes = 50000
+load_ckpt = False
+#load_ckpt = True
+ckpt_save_freq = 100
+
+env = football_env.create_environment(env_name = "academy_empty_goal", 
+                                    representation = "simple115",
+                                    number_of_left_players_agent_controls = 1,
+                                    stacked = False, logdir = "/tmp/football",
+                                    write_goal_dumps = False,
+                                    write_full_episode_dumps = False, render = False)
+
+
+dqn_agent = DQN(
+    env = env,
+    obs_size = (115,),
+    num_frame_stack = 1,
+    batch_size = 256,
+    mdp_gamma = 0.99,
+    initial_epsilon = 1.0,
+    min_epsilon = 0.1,
+    epsilon_decay_steps = int(1e6),
+    replay_capacity = int(1e5),
+    min_replay_size = int(1024),
+    train_freq = 4,
+    network_update_freq = 1000
+)
+
+dqn_agent.setup_graph(if_soft= False)
+===============================================================================================
+model 7
+soft update + high epsilon
+
+train_episodes = 20000
+load_ckpt = False
+#load_ckpt = True
+ckpt_save_freq = 200
+
+env = football_env.create_environment(env_name = "academy_empty_goal", 
+                                    representation = "simple115",
+                                    number_of_left_players_agent_controls = 1,
+                                    stacked = False, logdir = "/tmp/football",
+                                    write_goal_dumps = False,
+                                    write_full_episode_dumps = False, render = False)
+
+
+dqn_agent = DQN(
+    env = env,
+    obs_size = (115,),
+    num_frame_stack = 1,
+    batch_size = 128,
+    mdp_gamma = 0.99,
+    initial_epsilon = 1.0,
+    min_epsilon = 0.1,
+    epsilon_decay_steps = int(1e7),
+    replay_capacity = int(1e5),
+    min_replay_size = int(1024),
+    train_freq = 4,
+    network_update_freq = 4
+)
+
+dqn_agent.setup_graph(if_soft=True)

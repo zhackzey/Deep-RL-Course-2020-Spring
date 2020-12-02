@@ -1,0 +1,8 @@
+model_checkpoint_path: "step24339.ckpt"
+all_model_checkpoint_paths: "step82.ckpt"
+all_model_checkpoint_paths: "step4147.ckpt"
+all_model_checkpoint_paths: "step8190.ckpt"
+all_model_checkpoint_paths: "step12230.ckpt"
+all_model_checkpoint_paths: "step16260.ckpt"
+all_model_checkpoint_paths: "step20290.ckpt"
+all_model_checkpoint_paths: "step24339.ckpt"
